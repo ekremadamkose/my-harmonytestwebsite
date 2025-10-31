@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adam – My Travel Page</title>
+  <style>
+    :root{
+      --bg:#0f172a;        /* slate-900 */
+      --card:#111827;      /* gray-900 */
+      --text:#e5e7eb;      /* gray-200 */
+      --muted:#9ca3af;     /* gray-400 */
+      --accent:#22c55e;    /* green-500 */
+      --accent-2:#3b82f6;  /* blue-500 */
+      --star:#fbbf24;      /* amber-400 */
+      --chip:#1f2937;      /* gray-800 */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,Segoe UI,Roboto,Arial;
+      background:linear-gradient(180deg,#0b1223,#0f172a);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    header{
+      position:sticky; top:0; z-index:2;
+      padding:20px 16px;
+      background:rgba(15,23,42,.8);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid #1f2937;
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:24px 16px; position:relative; z-index:1;}
+    h1{margin:0 0 6px; font-size:clamp(22px,3vw,34px)}
+    p.lead{margin:0; color:var(--muted)}
+
+    .grid{
+      display:grid; gap:18px;
+      grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+      margin-top:18px;
+    }
+    .card{
+      background:var(--card); border:1px solid #1f2937;
+      border-radius:18px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.25);
+    }
+    .thumb{
+      position:relative; height:170px; overflow:hidden; background:#0b1223;
+    }
+    .thumb img{
+      width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05);
+    }
+    .badge{
+      position:absolute; left:10px; top:10px;
+      background:rgba(0,0,0,.55); color:#fff; border:1px solid #334155;
+      border-radius:999px; padding:6px 10px; font-size:12px;
+      display:flex; align-items:center; gap:6px;
+    }
+    .stars-badge .star{font-size:14px; color:var(--star)}
+    .content{padding:14px 14px 12px}
+    .title{font-weight:700; margin:0 0 6px; font-size:18px}
+    .meta{font-size:13px; color:var(--muted); margin-bottom:10px}
+
+    .rate-row{
+      display:flex; align-items:center; gap:10px; margin:8px 0 6px;
+    }
+    .stars{cursor:pointer; user-select:none}
+    .star{font-size:20px; line-height:1; color:#334155} /* empty */
+    .star.filled{color:var(--star)}
+
+    .actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .btn, .link{
+      border:none; background:var(--accent); color:#00110a;
+      padding:8px 12px; border-radius:12px; font-weight:700;
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .link{ background:var(--chip); color:var(--text); font-weight:600; }
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .chip{background:var(--chip); color:var(--muted); padding:6px 10px; border-radius:999px; font-size:12px}
+
+    section.plan{
+      background:rgba(17,24,39,.6); border:1px solid #1f2937; border-radius:18px;
+      padding:18px; margin-top:28px;
+    }
+    .plan h2{margin:0 0 6px}
+    .plan p{margin:4px 0 12px; color:var(--muted)}
+    .join{background:var(--accent-2); color:#001028}
+
+    footer{border-top:1px solid #1f2937; margin-top:26px; padding:18px; text-align:center; color:var(--muted)}
+    .small{font-size:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Adam – My Travel Page</h1>
+      <p class="lead">Places I’ve visited, star ratings, and comment links ⭐</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- DESTINATIONS -->
+    <div id="cards" class="grid">
+
+      <!-- Card #1 -->
+      <article class="card" data-key="istanbul">
+        <div class="thumb">
+          <!-- keep your photo link -->
+          <img src="https://losadventuros.com/wp-content/uploads/2023/03/14-16-places-to-see-in-istanbul-2-1024x682.jpg" alt="Istanbul" />
+          <div class="badge stars-badge" aria-live="polite">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span class="star">★</span><span class="star">★</span>
+            <span id="avg-istanbul" class="small" style="margin-left:6px">0.0 (0)</span>
+          </div>
+        </div>
+        <div class="content">
+          <h3 class="title">Istanbul – Old Town</h3>
+          <div class="meta">Hagia Sophia, Blue Mosque, Gülhane Park</div>
+
+          <div class="rate-row" data-rate-for="istanbul">
+            <span class="small">Rate:</span>
+            <span class="stars">
+              <span class="star" data-val="1">★</span>
+              <span class="star" data-val="2">★</span>
+              <span class="star" data-val="3">★</span>
+              <span class="star" data-val="4">★</span>
+              <span class="star" data-val="5">★</span>
+            </span>
+            <span class="small" id="you-istanbul" aria-live="polite"></span>
+          </div>
+
+          <div class="actions">
+            <a class="link" href="https://forms.gle/" target="_blank" rel="noopener">Leave a comment</a>
+            <a class="link" href="#plan">My Latest Trip Plan</a>
+          </div>
+
+          <div class="chips">
+            <span class="chip">History</span>
+            <span class="chip">Food</span>
+            <span class="chip">Sea</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card #2 -->
+      <article class="card" data-key="cappadocia">
+        <div class="thumb">
+          <img src="https://www.barcelo.com/guia-turismo/wp-content/uploads/2020/03/capadocia_888_3.jpg" alt="Cappadocia" />
+          <div class="badge stars-badge">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span class="star">★</span><span class="star">★</span>
+            <span id="avg-cappadocia" class="small" style="margin-left:6px">0.0 (0)</span>
+          </div>
+        </div>
+        <div class="content">
+          <h3 class="title">Cappadocia – Balloons</h3>
+          <div class="meta">Sunrise, valleys, balloon tours</div>
+
+          <div class="rate-row" data-rate-for="cappadocia">
+            <span class="small">Rate:</span>
+            <span class="stars">
+              <span class="star" data-val="1">★</span>
+              <span class="star" data-val="2">★</span>
+              <span class="star" data-val="3">★</span>
+              <span class="star" data-val="4">★</span>
+              <span class="star" data-val="5">★</span>
+            </span>
+            <span class="small" id="you-cappadocia" aria-live="polite"></span>
+          </div>
+
+          <div class="actions">
+            <a class="link" href="https://forms.gle/" target="_blank" rel="noopener">Leave a comment</a>
+          </div>
+          <div class="chips">
+            <span class="chip">Nature</span><span class="chip">Adventure</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card #3 -->
+      <article class="card" data-key="sanfrancisco">
+        <div class="thumb">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/3a/0e/b8/photo2jpg.jpg?w=1200&h=-1&s=1" alt="San Francisco" />
+          <div class="badge stars-badge">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span class="star">★</span><span class="star">★</span>
+            <span id="avg-sanfrancisco" class="small" style="margin-left:6px">0.0 (0)</span>
+          </div>
+        </div>
+        <div class="content">
+          <h3 class="title">San Francisco – Golden Gate</h3>
+          <div class="meta">Pier 39, Marin, Muir Woods</div>
+
+          <div class="rate-row" data-rate-for="sanfrancisco">
+            <span class="small">Rate:</span>
+            <span class="stars">
+              <span class="star" data-val="1">★</span>
+              <span class="star" data-val="2">★</span>
+              <span class="star" data-val="3">★</span>
+              <span class="star" data-val="4">★</span>
+              <span class="star" data-val="5">★</span>
+            </span>
+            <span class="small" id="you-sanfrancisco" aria-live="polite"></span>
+          </div>
+
+          <div class="actions">
+            <a class="link" href="https://forms.gle/" target="_blank" rel="noopener">Leave a comment</a>
+          </div>
+          <div class="chips">
+            <span class="chip">City</span><span class="chip">Coast</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- PLAN -->
+    <section id="plan" class="plan">
+      <h2>My Latest Trip Plan</h2>
+      <p>Weekend mini-route: <strong>Dallas → Austin → San Antonio</strong>. Early start, evening at River Walk 🛶</p>
+      <div class="actions">
+        <a class="btn join" href="https://forms.gle/" target="_blank" rel="noopener">Join us</a>
+        <a class="link" href="#">PDF Plan (coming soon)</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap small">© Adam’s Travel Page • Ratings are stored locally on your browser.</div>
+  </footer>
+
+ 
+    /*
+      Simple star rating:
+      - Users can rate each destination 1–5.
+      - Scores are stored in localStorage as { total, count }.
+      - The badge on the photo shows the live average (e.g., 4.2 ★ (13)).
+    */
+    const KEYS = ["istanbul","cappadocia","sanfrancisco"];
+
+    function readRating(key){
+      const raw = localStorage.getItem("rate:"+key);
+      if(!raw) return { total:0, count:0 };
+      try { return JSON.parse(raw); } catch { return { total:0, count:0 } }
+    }
+    function writeRating(key, obj){
+      localStorage.setItem("rate:"+key, JSON.stringify(obj));
+    }
+    function avg({total,count}){ return count ? (total/count) : 0; }
+
+    function paintBadge(key){
+      const data = readRating(key);
+      const a = avg(data);
+      const label = document.getElementById("avg-"+key);
+      if(label) label.textContent = a.toFixed(1)+" ("+data.count+")";
+    }
+
+    // Initial paint
+    KEYS.forEach(paintBadge);
+
+    // Interactions: rating rows
+    document.querySelectorAll("[data-rate-for]").forEach(row=>{
+      const key = row.getAttribute("data-rate-for");
+      row.querySelectorAll(".star").forEach(star=>{
+        star.addEventListener("mouseenter", e=>{
+          const v = +e.target.dataset.val;
+          row.querySelectorAll(".star").forEach(s=>{
+            s.classList.toggle("filled", +s.dataset.val <= v);
+          });
+        });
+        star.addEventListener("mouseleave", ()=>{
+          row.querySelectorAll(".star").forEach(s=> s.classList.remove("filled"));
+        });
+        star.addEventListener("click", e=>{
+          const v = +e.target.dataset.val;
+          const data = readRating(key);
+          data.total += v;
+          data.count += 1;
+          writeRating(key, data);
+          paintBadge(key);
+          const you = document.getElementById("you-"+key);
+          if(you) you.textContent = `Thanks! Your rating: ${v} ★`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
